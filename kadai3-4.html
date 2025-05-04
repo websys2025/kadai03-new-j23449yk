@@ -29,10 +29,10 @@
 
         // 商品購入の関数
         function buyItem(no) {
-            const item = items.find(i => i.id === no);
-            if (!item) {
-                console.log(`商品番号: ${no} は存在しません。`);
+            if (no < 1 || no > items.length) {
+                console.log(`${no}は無効な商品番号です。番号は1～${items.length}で指定してください。`);
             } else {
+                const item = items.find(i => i.id === no);
                 console.log(`商品番号: ${item.id}, 商品名: ${item.name}を購入します。`);
                 if (item.stock > 0) {
                     item.stock--;
@@ -43,16 +43,16 @@
             showItemList(); // 商品一覧の表示関数呼び出し
         }
 
-        showItemList(); // 商品一覧の表示関数呼び出し
-        buyItem(3); // 商品購入の関数呼び出し
-        buyItem(5); // 商品購入の関数呼び出し
-        buyItem(5); // 商品購入の関数呼び出し
+        // 実行部分
+        showItemList();   // 最初の一覧表示
+        buyItem(3);       // オレンジジュース購入（在庫あり）
+        buyItem(5);       // 炭酸水購入（在庫あり）
+        buyItem(5);       // 炭酸水購入（在庫なし）
+        buyItem(9);       // 無効な番号
     </script>
 </body>
 </html>
 
-期待される出力例
------------------
 商品は以下の8種類です。
 商品番号: 1, 商品名: 緑茶, 金額: 140, 在庫数: 5
 商品番号: 2, 商品名: 水, 金額: 100, 在庫数: 14
